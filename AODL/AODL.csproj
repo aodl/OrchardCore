@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\OrchardCore\OrchardCore.Application.Cms.Targets\OrchardCore.Application.Cms.Targets.csproj" />
+    <ProjectReference Include="..\Theme\AodlTheme\AodlTheme.csproj" />
   </ItemGroup>
 
   <!-- Necessary as we reference the Project and not the Package -->

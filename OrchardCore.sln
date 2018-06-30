@@ -276,7 +276,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Setup.Abstracti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Application.Targets", "src\OrchardCore\OrchardCore.Application.Targets\OrchardCore.Application.Targets.csproj", "{7D28EEFB-17FD-4D86-99E4-6B5A3C490BE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AODL", "AODL\AODL.csproj", "{8A936CE3-7DF7-4F95-BB4C-F062A83EC8DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AODL", "AODL\AODL.csproj", "{8A936CE3-7DF7-4F95-BB4C-F062A83EC8DC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.FileStorage.AzureBlob", "src\OrchardCore\OrchardCore.FileStorage.AzureBlob\OrchardCore.FileStorage.AzureBlob.csproj", "{F614EC10-090B-4334-8E53-0BCA997E73F0}"
 EndProject
@@ -340,6 +340,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Forms", "src\OrchardCore.Modules\OrchardCore.Forms\OrchardCore.Forms.csproj", "{BBAE1D3D-0F40-4CDB-A7B9-AE959F5EA6B0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrchardCore.Cms.Templates", "src\Templates\OrchardCore.Cms.Templates\OrchardCore.Cms.Templates.csproj", "{6EF610C3-EC5A-45CC-BDCC-0159B6D2D15A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AodlTheme", "Theme\AodlTheme\AodlTheme.csproj", "{E512ABCE-30C0-472F-BF92-0F096F0007D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -839,14 +841,14 @@ Global
 		{7D28EEFB-17FD-4D86-99E4-6B5A3C490BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D28EEFB-17FD-4D86-99E4-6B5A3C490BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D28EEFB-17FD-4D86-99E4-6B5A3C490BE3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F614EC10-090B-4334-8E53-0BCA997E73F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F614EC10-090B-4334-8E53-0BCA997E73F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F614EC10-090B-4334-8E53-0BCA997E73F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F614EC10-090B-4334-8E53-0BCA997E73F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8A936CE3-7DF7-4F95-BB4C-F062A83EC8DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8A936CE3-7DF7-4F95-BB4C-F062A83EC8DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A936CE3-7DF7-4F95-BB4C-F062A83EC8DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A936CE3-7DF7-4F95-BB4C-F062A83EC8DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F614EC10-090B-4334-8E53-0BCA997E73F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F614EC10-090B-4334-8E53-0BCA997E73F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F614EC10-090B-4334-8E53-0BCA997E73F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F614EC10-090B-4334-8E53-0BCA997E73F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7BB7DDE2-5C66-4E0B-81A8-C0CBE6D3B4A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7BB7DDE2-5C66-4E0B-81A8-C0CBE6D3B4A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BB7DDE2-5C66-4E0B-81A8-C0CBE6D3B4A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -919,6 +921,10 @@ Global
 		{6EF610C3-EC5A-45CC-BDCC-0159B6D2D15A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF610C3-EC5A-45CC-BDCC-0159B6D2D15A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF610C3-EC5A-45CC-BDCC-0159B6D2D15A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E512ABCE-30C0-472F-BF92-0F096F0007D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E512ABCE-30C0-472F-BF92-0F096F0007D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E512ABCE-30C0-472F-BF92-0F096F0007D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E512ABCE-30C0-472F-BF92-0F096F0007D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
