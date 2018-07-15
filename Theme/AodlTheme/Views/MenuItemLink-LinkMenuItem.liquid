@@ -1,7 +1,7 @@
-﻿{% assign link = Model.ContentItem.Content.LinkMenuItemPart %}
+{% assign link = Model.ContentItem.Content.LinkMenuItemPart %}
 
 {% if Model.HasItems %}
-    <a href="{{ link.Url | href }}" class="nav-link dropdown-toggle">{{ link.Name }}<b class="caret"></b></a>
+    <a href="#" class="nav-link {{dropdownClassOrEmpty}} headerLink headerLinkTarget dropdown-toggle" data-toggle="dropdown" data-headerlinkid="Drop-link">{{ link.Name }}<b class="caret"></b></a>
 {% else %}
-    <a href="{{ link.Url | href }}" class="nav-link">{{ link.Name }}</a>
+    <a href="#" class="nav-link {{dropdownClassOrEmpty}} headerLink headerLinkTarget" data-headerlink="{{ link.Url | href }}">{{ link.Name }}</a>
 {% endif %}

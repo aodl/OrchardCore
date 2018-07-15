@@ -1,7 +1,12 @@
-﻿<nav>
-    <ul class="nav navbar-nav navbar-right {{ Model.Classes | join: " " }}">
-        {% for item in Model.Items %}
-            {{ item | shape_render }}
-        {% endfor %}
-    </ul>
-</nav>
+<ul class="nav navbar-nav menuLinks {{ Model.Classes | join: " " }}">
+    {% for item in Model.Items %}
+        {{ item | shape_render }}
+    {% endfor %}
+</ul>
+<ul class="nav navbar-nav">
+    <li style="list-style: none;"><!--IE list-style bug, needs inlining-->
+        <a href="https://www.facebook.com/aodlorimer" style="display: inline; padding: 0"><img style="padding: 7px;" src="/AodlTheme/img/facebookIcon.png"></a>
+        <a href="https://twitter.com/AODLorimer" style="display: inline; padding: 0"><img style="padding: 7px;" src="/AodlTheme/img/twitterIcon.png"></a>
+        <a href="https://uk.linkedin.com/in/aodlorimer" style="display: inline; padding: 0"><img style="padding: 7px;" src="/AodlTheme/img/linkedInIcon.png"></a>
+    </li>
+</ul>

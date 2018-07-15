@@ -10,5 +10,17 @@
     "inputFiles": [
       "wwwroot/css/menu.css"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Header.min.css",
+    "inputFiles": [
+      "wwwroot/css/Header.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Page.min.css",
+    "inputFiles": [
+      "wwwroot/css/Page.css"
+    ]
   }
 ]
