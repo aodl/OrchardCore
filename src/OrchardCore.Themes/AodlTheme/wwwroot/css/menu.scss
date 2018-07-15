@@ -1,0 +1,360 @@
+$dropdown-text-color: #d7d7ff;
+
+$header-bg-color-main: black;
+$header-separator-color: #222;
+$header-fg-color: #ddd;
+$header-fg-color-dark: #888;
+$header-fg-color-active: #fff;
+$header-fg-color-semi-active: #fefefe;
+
+$in-front-of-navbar: 1031;
+
+$largest-screen-width-val: 1600;
+$largest-screen-width: ($largest-screen-width-val) * 1px;
+
+$large-screen-width: 767px;
+$larger-screen-width: 1000px;
+$small-screen-wdith: 480px;
+$smallest-screen-width: 220px;
+
+$small-screen-height: 700px;
+$smaller-screen-height: 500px;
+
+$title-box-width: 200px;
+$title-box-max-height: $title-box-width;
+
+$navbar-height: 35px;
+$navbar-height-largest-screen: 2.5vw;
+
+a {
+    text-decoration: none !important;
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    padding-top: 50px;
+    max-width: $largest-screen-width;
+    height: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+
+@media (min-width: #{$larger-screen-width + 1}) {
+    .customContainer {
+        max-width: 80%;
+        margin: auto;
+    }
+}
+
+.customNavBar {
+    display: flex;
+}
+
+.navbar-brand {
+    padding: 0.31rem !important;
+}
+
+.navbar-header{
+    flex-basis: 100%;
+}
+
+// ----------------------------------------- bodyScroll and scroll bar style
+.bodyScroll {
+    background-color: white;
+    left: 0;
+    min-width: $smallest-screen-width;
+    overflow-y: auto;
+    position: absolute;
+    right: 1px;
+    bottom: 0;
+    top: $navbar-height;
+    z-index: -1;
+}
+@media (min-width: #{$largest-screen-width + 1}) {
+    .bodyScroll {
+        top: $navbar-height-largest-screen;
+    }
+}
+@media (max-width: $smallest-screen-width){
+    .bodyScroll{
+        position: static;
+    }
+}
+
+::-webkit-scrollbar { 
+    background-color: white;
+    box-shadow: inset 1px 1px 5px 2px #ddd;
+    width: 12px;
+}
+::-webkit-scrollbar-thumb { 
+    background-color: #333;
+    box-shadow: inset 1px 1px 5px 2px #111;
+    border-radius: 10px 10px 10px 10px;
+}
+
+
+// ------------------------------------------ Title Box
+
+@media (min-width: #{$small-screen-wdith + 1}) {
+    .title-box {
+        animation-name: pokeDown;
+    }
+}
+.title-box {
+    animation-duration: 6s;
+    background-color: $header-bg-color-main;
+    border-radius: 0 0 10px 10px;
+    margin-left: -10px;
+    padding: 0 25px 0 25px;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    z-index: $in-front-of-navbar;
+}
+
+.title-box > h1, .title-box > h2, .title-box > h3 {
+    color: $header-fg-color-semi-active;
+    line-height: 100%;
+    margin-bottom: 0;
+    transition: line-height 0.5s;
+}
+
+.title-box > p {
+    color: $header-fg-color;
+    font-size: 80%;
+    font-weight: lighter;
+    margin: 0 0 4px 0;
+}
+
+@media (min-width: #{$large-screen-width + 1}) and (min-height: #{$small-screen-height + 1}){
+    .title-box > h1, .title-box > h2, .title-box > h3 {
+        line-height: 150%;
+        transition: line-height 0.5s;
+    }
+}
+@media (max-width: $small-screen-wdith), (max-height: $smaller-screen-height){
+    .title-box {
+        display: none;
+    }
+}
+@media (max-width: $large-screen-width) {
+    .customNavBar {
+        flex-direction: column;
+    }
+}
+
+
+// ---------------------------------------- Title Box slanted shadow style
+.title-box:before, .title-box:after
+{
+    box-shadow: -1px 30px 15px 2px #000;
+    bottom: 34px;
+    content: "";
+    position: absolute;
+    height: 1px;
+    width: 50%;
+    z-index: -10000;
+}
+.title-box:before{
+    left: 10px;
+    transform: rotate(-8deg);
+}
+.title-box:after
+{
+    right: 10px;
+    transform: rotate(6deg);
+}
+
+
+// ------------------------------------------ Navigation Bar
+.navbar-toggler {
+    font-size: medium !important;
+}
+.menuLinks, .customNavBar {
+    flex: 1;
+}
+.navbar {
+    background-color: $header-bg-color-main;
+    border-radius: 0;
+    box-shadow: 0 1px 5px 1px #333;
+    min-height: $navbar-height !important;
+    min-width: $smallest-screen-width;
+    left: 0;
+    right: 0;
+    padding-top: 2px;
+    padding-bottom: 4px;
+    position: absolute;
+    top: 0;
+}
+.navbar-dark {
+    opacity: 0.97;
+    .navbar-nav > li > a.headerLinkTarget {
+        color: $header-fg-color-dark;
+        &.active {
+            color: $header-fg-color-active;
+        }
+    }
+}
+.navbar-nav {
+    float: right;
+    text-align: right;
+}
+
+.navbar-header ~ * {
+    background-color: $header-bg-color-main;
+}
+.navbar-header {
+    opacity: 0.97;
+}
+
+@media (max-width: $large-screen-width){
+    .navbar-nav {
+        width: 100%;
+    }
+}
+
+.navbar-brand{
+    color: $header-fg-color-active !important;
+    font-size: large;
+    opacity: 0;
+}
+
+@media (min-width: #{$large-screen-width + 1}){
+    .navbar-header ~ * {
+        background-color: $header-bg-color-main;
+    }
+    .navbar-dark .navbar-nav > li > a.headerLinkTarget {
+        border-left: 1px solid $header-separator-color !important;
+        font-size: 12px;
+        line-height: 24px;
+        max-height: 40px;
+        transition: color 1s, padding-right 1.25s, padding-left 1.25s, border 2s;
+        padding: 11px 24px 11px 24px;
+
+        &.active {
+            border-right-color: $header-fg-color !important;
+            font-weight: normal;
+            padding-right: 40px !important;
+            padding-left: 40px !important;
+        }
+    }
+    .navbar-brand {
+        height: 0px;
+        padding-top: 7px;
+        font-size: large;
+    }
+    .navbar-nav {
+        float: left;
+        text-align: left;
+        max-height: 40px;
+    }
+}
+
+#navBarDropdown {
+    left: 0;
+    z-index: 1000;
+    background-color: $header-bg-color-main;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    border-radius: 4px;
+    list-style: none;
+    & > li > a {
+        padding: 3px 20px;
+        text-decoration: none;
+    }
+}
+
+@media (min-width: #{$large-screen-width + 1}){
+    #navBarDropdown {
+        position: absolute;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        box-shadow: none;
+        & > li > a {
+            padding: 5px 15px 5px 25px;
+            line-height: 20px;
+        }
+    }
+}
+
+@media (max-width: $small-screen-wdith), (max-height: $smaller-screen-height){
+    .navbar-brand{
+        animation-name: fadeIn;
+        animation-timing-function: cubic-bezier(1,0,.5,1);
+        animation-duration: 4s;
+        opacity: 1;
+    }
+}
+
+
+// ------------------------------------------ Collapse Button
+
+.navbar-toggle {
+    background-color: $header-bg-color-main;
+    &:focus{
+        outline-color: $header-fg-color;
+    }
+}
+
+// ------------------------------------------ Header Link Dropdown
+
+#navBarDropdown{
+  background-color: $header-bg-color-main;
+  opacity: 0.97;
+  &>li>a{
+    color: $dropdown-text-color;
+    font-size: smaller;
+    &:hover{
+      color: $header-fg-color-semi-active;
+      background-color: $header-bg-color-main;
+    }
+  }
+}
+
+@media (max-width: $large-screen-width){
+    .navbar-dark {
+        background-color: $header-bg-color-main;
+    }
+}
+
+
+// ----------------------------------------------------------- Animations
+
+@-moz-keyframes pokeDown {
+    from { top: -$title-box-max-height; }
+    to { top: 0; }
+}
+
+@-webkit-keyframes pokeDown {
+    from { top: -$title-box-max-height; }
+    to { top: 0; }
+}
+
+@keyframes pokeDown {
+    from { top: -$title-box-max-height; }
+    to { top: 0; }
+}
+
+@-moz-keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1;  }
+}
+
+@-webkit-keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1;  }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1;  }
+}
