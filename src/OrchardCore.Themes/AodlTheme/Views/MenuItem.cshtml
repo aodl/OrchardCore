@@ -1,0 +1,48 @@
+@{
+    int level = (int)Model.Level;
+    TagBuilder tag = Tag(Model, "li");
+    tag.AddCssClass("nav-item");
+    tag.Attributes.Add("style", "list-style: none;");// IE list-style bug, needs inlining
+
+    if ((bool)Model.HasItems)
+    {
+        tag.AddCssClass("dropdown");
+    }
+
+    // Morphing the shape to keep Model untouched
+    Model.Metadata.Alternates.Clear();
+    Model.Metadata.Type = "MenuItemLink";
+
+    tag.InnerHtml.AppendHtml(await DisplayAsync(Model));
+
+    if ((bool)(Model.HasItems))
+    {
+        TagBuilder parentTag = Tag(Model, "ul");
+        parentTag.AddCssClass("dropdown-menu");
+        parentTag.GenerateId("navBarDropdown", "_");
+
+        foreach (var item in Model.Items)
+        {
+            item.Level = level + 1;
+            item.ParentTag = parentTag;
+            parentTag.InnerHtml.AppendHtml(await DisplayAsync(item));
+        }
+
+        tag.InnerHtml.AppendHtml(parentTag);
+    }
+}
+
+@tag
+
+
+    <!--<li><a href="#" class="headerLink headerLinkTarget" id="Blog-link" data-headerlinkid="Blog-link">Blog</a></li>
+    <li>
+        <a href="#" class="headerLinkTarget" id="Drop-link" data-toggle="collapse" data-target="#navBarDropdown" role="button">Projects</a>
+        <ul class="collapse" id="navBarDropdown">
+            <li><a href="#" class="headerLink" data-headerlinkid="Drop-link">Action</a></li>
+            <li><a href="#" class="headerLink" data-headerlinkid="Drop-link">Another action</a></li>
+            <li><a href="#" class="headerLink" data-headerlinkid="Drop-link">Something else here</a></li>
+        </ul>
+    </li>
+    <li><a href="#" class="headerLink headerLinkTarget" id="Publications-link" data-headerlinkid="Publications-link">Publications</a></li>
+    <li><a href="#" class="headerLink headerLinkTarget" id="Contact-link" data-headerlinkid="Contact-link">Contact</a></li>-->

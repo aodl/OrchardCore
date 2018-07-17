@@ -23,9 +23,6 @@ body {
 .navbar-brand {
   padding: 0.31rem !important; }
 
-.navbar-header {
-  flex-basis: 100%; }
-
 .bodyScroll {
   background-color: white;
   left: 0;
@@ -93,7 +90,11 @@ body {
 
 @media (max-width: 767px) {
   .customNavBar {
-    flex-direction: column; } }
+    flex-direction: column; }
+  .navbar-header {
+    flex-basis: 100%; }
+  .nav-item {
+    float: right; } }
 
 .title-box:before, .title-box:after {
   box-shadow: -1px 30px 15px 2px #000;

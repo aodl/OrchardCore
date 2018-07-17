@@ -58,10 +58,6 @@ body {
     padding: 0.31rem !important;
 }
 
-.navbar-header{
-    flex-basis: 100%;
-}
-
 // ----------------------------------------- bodyScroll and scroll bar style
 .bodyScroll {
     background-color: white;
@@ -144,6 +140,12 @@ body {
 @media (max-width: $large-screen-width) {
     .customNavBar {
         flex-direction: column;
+    }
+    .navbar-header {
+        flex-basis: 100%;
+    }
+    .nav-item {
+        float: right;
     }
 }
 

@@ -1,7 +1,0 @@
-{% assign link = Model.ContentItem.Content.LinkMenuItemPart %}
-
-{% if Model.HasItems %}
-    <a href="#" class="nav-link {{dropdownClassOrEmpty}} headerLink headerLinkTarget dropdown-toggle" data-toggle="dropdown" data-headerlinkid="Drop-link">{{ link.Name }}<b class="caret"></b></a>
-{% else %}
-    <a href="#" class="nav-link {{dropdownClassOrEmpty}} headerLink headerLinkTarget" data-headerlink="{{ link.Url | href }}">{{ link.Name }}</a>
-{% endif %}

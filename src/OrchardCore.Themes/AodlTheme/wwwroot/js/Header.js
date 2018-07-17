@@ -1,7 +1,27 @@
-(function ($) {
+(function () {
     var largeScreenWidth = 768;
     var largestScreenWidth = 1600;
-    (function page_navigator($) {
+
+    (function pageZoomer() {
+        var body = $("body");
+        function zoomIfBigScreen() {
+            if (window.innerWidth >= largestScreenWidth) {
+                var scale = window.innerWidth / largestScreenWidth;
+                body.css({
+                    "transform": "scale(" + scale + ", " + scale + ")",
+                    "transform-origin": "top"
+                });
+            } else {
+                body.css("transform", "scaleY(" + 1 + ")");
+            }
+        }
+        zoomIfBigScreen();
+        $(window).resize(function () {
+            zoomIfBigScreen();
+        });
+    }());
+
+    (function page_navigator() {
 
         // collapse dropdown when clicking off it
         var navDropdown = $('#navBarDropdown');
@@ -10,7 +30,7 @@
                 navDropdown.collapse('hide');
         });
 
-        var updateBodyContent = (function ($) {
+        var updateBodyContent = (function () {
             //private variables
             var protocol_host = window.location.protocol + "//" + window.location.host;
             var $bodyContent = $(".body-content");
@@ -21,9 +41,9 @@
                     $bodyContent.load(protocol_host + "/" + controller + "/" + action).hide().fadeIn(1150);
                 });
             };
-        }($));
+        }());
 
-        var updateHeaderLinks = (function ($) {
+        var updateHeaderLinks = (function () {
             //private variables
             var $headerLinkTargets = $(".headerLinkTarget");
             //closure returned
@@ -43,9 +63,9 @@
             var action = $(this).data("headerlinkid").split('-')[0];
             fadeInPartial({ controller: 'Home', action: action });
         });
-    }($));
+    }());
 
-    (function navbar_horizontalOffsetUpdater($) {
+    (function navbar_horizontalOffsetUpdater() {
         var titleBox = $('.title-box');
         var smallScreenHeader = $('.navbar-header');
         var navbarBrand = $(".navbar-brand");
@@ -65,25 +85,6 @@
                 smallScreenHeader.css("flex-basis", "100%");
             }
         });
-    }($));
+    }());
 
-    (function pageZoomer($) {
-        var body = $("body");
-        function zoomIfBigScreen() {
-            if (window.innerWidth >= largestScreenWidth) {
-                var scale = window.innerWidth / largestScreenWidth;
-                body.css({
-                    "transform": "scale(" + scale + ", " + scale + ")",
-                    "transform-origin": "top"
-                });
-            } else {
-                body.css("transform", "scaleY(" + 1 + ")");
-            }
-        }
-        zoomIfBigScreen();
-        $(window).resize(function () {
-            zoomIfBigScreen();
-        });
-    }($));
-
-}(jQuery));
+}());

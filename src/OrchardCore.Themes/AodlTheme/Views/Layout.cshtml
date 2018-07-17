@@ -1,0 +1,56 @@
+@inject OrchardCore.Settings.ISiteService SiteService
+@{
+    var site = await SiteService.GetSiteSettingsAsync();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@RenderTitleSegments(site.SiteName, "before")</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/TheTheme/favicon.ico" />
+    <script asp-name="bootstrap" use-cdn="true" version="4" at="Foot"></script>
+    <style asp-name="bootstrap" use-cdn="true" version="4"></style>
+    <style asp-src="/AodlTheme/css/menu.min.css"></style>
+    <resources type="Meta" />
+    <resources type="HeadLink" />
+    <resources type="Stylesheet" />
+    <resources type="HeadScript" />
+</head>
+<body>
+    <div class="customContainer">
+        <a href="#" class="title-box headerLink headerLinkTarget" id="About-link" data-headerlinkid="About-link">
+            <h1>Alex O.D.<br />Lorimer</h1>
+            <p>BA(Hons) / ResM / MSc</p>
+        </a>
+    </div>
+    <nav role="navigation" class="navbar navbar-dark navbar-expand-md">
+        <div class="customContainer customNavBar">
+            <div class="navbar-header">
+                <a href="~/#" class="navbar-brand headerLink headerLinkTarget" id="About-link" data-headerlinkid="About-link">@site.SiteName</a>
+                <button class="navbar-toggler float-right" data-toggle="collapse" data-target="#collapsibleNavContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse" id="collapsibleNavContent">
+                <menu alias="alias:main-menu" cache-id="main-menu" cache-duration="00:05:00" cache-tag="alias:main-menu" />
+            </div>   
+        </div>
+    </nav>
+    @await RenderSectionAsync("Header", required: false)
+    <div class="bodyScroll">
+        <div class="bodyAndFooter">
+            <div class="container">
+                @await RenderBodyAsync()
+            </div>
+            <footer class="container">
+                <!--<hr />
+                <p>&copy; @DateTime.Now.Year - Alexander O.D. Lorimer</p>-->
+                @await RenderSectionAsync("Footer", required: false)
+            </footer>
+        </div>
+    </div>
+    <resources type="FootScript" />
+    <script src="/AodlTheme/js/Header.js"></script>
+</body>
+</html>
