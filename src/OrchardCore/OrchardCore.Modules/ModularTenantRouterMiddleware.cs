@@ -113,7 +113,7 @@ namespace OrchardCore.Modules
 
             // IStartup instances are ordered by module dependency with an Order of 0 by default.
             // OrderBy performs a stable sort so order is preserved among equal Order values.
-            startups = startups.OrderBy(s => s.Order);
+            startups = startups.OrderBy(s => s.Order); 
 
             var tenantRouteBuilder = appBuilder.ApplicationServices.GetService<IModularTenantRouteBuilder>();
             var routeBuilder = tenantRouteBuilder.Build(appBuilder);

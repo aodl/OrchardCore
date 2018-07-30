@@ -1,0 +1,13 @@
+
+<div class="bodyScroll body-content">
+    <div class="bodyAndFooter">
+        <div class="container">
+            @await RenderBodyAsync()
+        </div>
+        <footer class="container">
+            <!--<hr />
+            <p>&copy; @DateTime.Now.Year - Alexander O.D. Lorimer</p>-->
+            @await RenderSectionAsync("Footer", required: false)
+        </footer>
+    </div>
+</div>
