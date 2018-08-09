@@ -1,0 +1,47 @@
+$dropdown-text-color: #d7d7ff;
+
+$header-bg-color-main: black;
+$header-separator-color: #222;
+$header-fg-color: #ddd;
+$header-fg-color-dark: #888;
+$header-fg-color-active: #fff;
+$header-fg-color-semi-active: #fefefe;
+
+$in-front-of-navbar: 1031;
+
+$largest-screen-width-val: 1600;
+$largest-screen-width: ($largest-screen-width-val) * 1px;
+
+$large-screen-width: 767px;
+$larger-screen-width: 991px;
+$small-screen-wdith: 480px;
+$smallest-screen-width: 220px;
+
+$small-screen-height: 700px;
+$smaller-screen-height: 500px;
+
+$title-box-width: 200px;
+$title-box-max-height: $title-box-width;
+
+$navbar-height: 35px;
+
+//boostrap 4 sizes
+$sm-min: 576px;
+$sm-max: 768px;
+$md-min: $sm-max + 1;
+$md-max: 991px;
+$lg-min: $md-max + 1;
+$lg-max: 1200px;
+$xl-min: $lg-max + 1;
+
+@mixin atLargetScreenWidth {
+    @media (min-width: #{$larger-screen-width + 1}) {
+        @content;
+    }
+}
+
+@mixin titleBoxGrowThreshold {
+    @media (min-width: #{$large-screen-width + 1}) and (min-height: #{$small-screen-height + 1}) {
+        @content;
+    }
+}

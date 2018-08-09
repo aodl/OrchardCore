@@ -18,7 +18,7 @@
     if ((bool)(Model.HasItems))
     {
         TagBuilder parentTag = Tag(Model, "ul");
-        parentTag.AddCssClass("dropdown-menu");
+        parentTag.AddCssClass("dropdown-menu dropdown-menu-right");
         parentTag.GenerateId("navBarDropdown", "_");
 
         foreach (var item in Model.Items)
@@ -34,15 +34,3 @@
 
 @tag
 
-
-    <!--<li><a href="#" class="headerLink headerLinkTarget" id="Blog-link" data-headerlinkid="Blog-link">Blog</a></li>
-    <li>
-        <a href="#" class="headerLinkTarget" id="Drop-link" data-toggle="collapse" data-target="#navBarDropdown" role="button">Projects</a>
-        <ul class="collapse" id="navBarDropdown">
-            <li><a href="#" class="headerLink" data-headerlinkid="Drop-link">Action</a></li>
-            <li><a href="#" class="headerLink" data-headerlinkid="Drop-link">Another action</a></li>
-            <li><a href="#" class="headerLink" data-headerlinkid="Drop-link">Something else here</a></li>
-        </ul>
-    </li>
-    <li><a href="#" class="headerLink headerLinkTarget" id="Publications-link" data-headerlinkid="Publications-link">Publications</a></li>
-    <li><a href="#" class="headerLink headerLinkTarget" id="Contact-link" data-headerlinkid="Contact-link">Contact</a></li>-->

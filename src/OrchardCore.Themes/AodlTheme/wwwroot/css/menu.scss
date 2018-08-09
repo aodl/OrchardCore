@@ -1,30 +1,4 @@
-$dropdown-text-color: #d7d7ff;
-
-$header-bg-color-main: black;
-$header-separator-color: #222;
-$header-fg-color: #ddd;
-$header-fg-color-dark: #888;
-$header-fg-color-active: #fff;
-$header-fg-color-semi-active: #fefefe;
-
-$in-front-of-navbar: 1031;
-
-$largest-screen-width-val: 1600;
-$largest-screen-width: ($largest-screen-width-val) * 1px;
-
-$large-screen-width: 767px;
-$larger-screen-width: 1000px;
-$small-screen-wdith: 480px;
-$smallest-screen-width: 220px;
-
-$small-screen-height: 700px;
-$smaller-screen-height: 500px;
-
-$title-box-width: 200px;
-$title-box-max-height: $title-box-width;
-
-$navbar-height: 35px;
-$navbar-height-largest-screen: 2.5vw;
+@import "variables";
 
 a {
     text-decoration: none !important;
@@ -43,7 +17,7 @@ body {
     margin: auto;
 }
 
-@media (min-width: #{$larger-screen-width + 1}) {
+@include atLargetScreenWidth {
     .customContainer {
         max-width: 80%;
         margin: auto;
@@ -69,11 +43,6 @@ body {
     bottom: 0;
     top: $navbar-height;
     z-index: -1;
-}
-@media (min-width: #{$largest-screen-width + 1}) {
-    .bodyScroll {
-        top: $navbar-height-largest-screen;
-    }
 }
 @media (max-width: $smallest-screen-width){
     .bodyScroll{
@@ -126,7 +95,7 @@ body {
     margin: 0 0 4px 0;
 }
 
-@media (min-width: #{$large-screen-width + 1}) and (min-height: #{$small-screen-height + 1}){
+@include titleBoxGrowThreshold {
     .title-box > h1, .title-box > h2, .title-box > h3 {
         line-height: 150%;
         transition: line-height 0.5s;
@@ -143,9 +112,6 @@ body {
     }
     .navbar-header {
         flex-basis: 100%;
-    }
-    .nav-item {
-        float: right;
     }
 }
 
@@ -182,7 +148,7 @@ body {
 .navbar {
     background-color: $header-bg-color-main;
     border-radius: 0;
-    box-shadow: 0 1px 5px 1px #333;
+    box-shadow: 0 1px 5px 1px #111;
     min-height: $navbar-height !important;
     min-width: $smallest-screen-width;
     left: 0;
@@ -193,7 +159,6 @@ body {
     top: 0;
 }
 .navbar-dark {
-    opacity: 0.97;
     .navbar-nav > li > a.headerLinkTarget {
         color: $header-fg-color-dark;
         &.active {
@@ -211,6 +176,7 @@ body {
 }
 .navbar-header {
     opacity: 0.97;
+    flex-basis: 100%;
 }
 
 @media (max-width: $large-screen-width){
@@ -226,13 +192,16 @@ body {
 }
 
 @media (min-width: #{$large-screen-width + 1}){
+    .navbar-header {
+        flex-basis: 250px;
+    }
     .navbar-header ~ * {
         background-color: $header-bg-color-main;
     }
     .navbar-dark .navbar-nav > li > a.headerLinkTarget {
         border-left: 1px solid $header-separator-color !important;
         font-size: 12px;
-        line-height: 24px;
+        line-height: 20px;
         max-height: 40px;
         transition: color 1s, padding-right 1.25s, padding-left 1.25s, border 2s;
         padding: 11px 24px 11px 24px;
@@ -248,6 +217,7 @@ body {
         height: 0px;
         padding-top: 7px;
         font-size: large;
+        line-height: 31px;
     }
     .navbar-nav {
         float: left;
@@ -257,15 +227,14 @@ body {
 }
 
 #navBarDropdown {
-    left: 0;
     z-index: 1000;
     background-color: $header-bg-color-main;
     min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
     font-size: 14px;
     border-radius: 4px;
     list-style: none;
+    text-align: right;
+
     & > li > a {
         padding: 3px 20px;
         text-decoration: none;
@@ -274,15 +243,13 @@ body {
 
 @media (min-width: #{$large-screen-width + 1}){
     #navBarDropdown {
-        position: absolute;
         float: none;
         width: auto;
         margin-top: 0;
         background-color: transparent;
-        border: 0;
         box-shadow: none;
+        text-align: left;
         & > li > a {
-            padding: 5px 15px 5px 25px;
             line-height: 20px;
         }
     }

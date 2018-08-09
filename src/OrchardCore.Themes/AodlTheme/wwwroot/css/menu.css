@@ -12,7 +12,7 @@ body {
   max-height: 100%;
   margin: auto; }
 
-@media (min-width: 1001px) {
+@media (min-width: 992px) {
   .customContainer {
     max-width: 80%;
     margin: auto; } }
@@ -33,10 +33,6 @@ body {
   bottom: 0;
   top: 35px;
   z-index: -1; }
-
-@media (min-width: 1601px) {
-  .bodyScroll {
-    top: 2.5vw; } }
 
 @media (max-width: 220px) {
   .bodyScroll {
@@ -92,9 +88,7 @@ body {
   .customNavBar {
     flex-direction: column; }
   .navbar-header {
-    flex-basis: 100%; }
-  .nav-item {
-    float: right; } }
+    flex-basis: 100%; } }
 
 .title-box:before, .title-box:after {
   box-shadow: -1px 30px 15px 2px #000;
@@ -122,7 +116,7 @@ body {
 .navbar {
   background-color: black;
   border-radius: 0;
-  box-shadow: 0 1px 5px 1px #333;
+  box-shadow: 0 1px 5px 1px #111;
   min-height: 35px !important;
   min-width: 220px;
   left: 0;
@@ -132,12 +126,10 @@ body {
   position: absolute;
   top: 0; }
 
-.navbar-dark {
-  opacity: 0.97; }
-  .navbar-dark .navbar-nav > li > a.headerLinkTarget {
-    color: #888; }
-    .navbar-dark .navbar-nav > li > a.headerLinkTarget.active {
-      color: #fff; }
+.navbar-dark .navbar-nav > li > a.headerLinkTarget {
+  color: #888; }
+  .navbar-dark .navbar-nav > li > a.headerLinkTarget.active {
+    color: #fff; }
 
 .navbar-nav {
   float: right;
@@ -147,7 +139,8 @@ body {
   background-color: black; }
 
 .navbar-header {
-  opacity: 0.97; }
+  opacity: 0.97;
+  flex-basis: 100%; }
 
 @media (max-width: 767px) {
   .navbar-nav {
@@ -159,12 +152,14 @@ body {
   opacity: 0; }
 
 @media (min-width: 768px) {
+  .navbar-header {
+    flex-basis: 250px; }
   .navbar-header ~ * {
     background-color: black; }
   .navbar-dark .navbar-nav > li > a.headerLinkTarget {
     border-left: 1px solid #222 !important;
     font-size: 12px;
-    line-height: 24px;
+    line-height: 20px;
     max-height: 40px;
     transition: color 1s, padding-right 1.25s, padding-left 1.25s, border 2s;
     padding: 11px 24px 11px 24px; }
@@ -176,37 +171,34 @@ body {
   .navbar-brand {
     height: 0px;
     padding-top: 7px;
-    font-size: large; }
+    font-size: large;
+    line-height: 31px; }
   .navbar-nav {
     float: left;
     text-align: left;
     max-height: 40px; } }
 
 #navBarDropdown {
-  left: 0;
   z-index: 1000;
   background-color: black;
   min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
   font-size: 14px;
   border-radius: 4px;
-  list-style: none; }
+  list-style: none;
+  text-align: right; }
   #navBarDropdown > li > a {
     padding: 3px 20px;
     text-decoration: none; }
 
 @media (min-width: 768px) {
   #navBarDropdown {
-    position: absolute;
     float: none;
     width: auto;
     margin-top: 0;
     background-color: transparent;
-    border: 0;
-    box-shadow: none; }
+    box-shadow: none;
+    text-align: left; }
     #navBarDropdown > li > a {
-      padding: 5px 15px 5px 25px;
       line-height: 20px; } }
 
 @media (max-width: 480px), (max-height: 500px) {

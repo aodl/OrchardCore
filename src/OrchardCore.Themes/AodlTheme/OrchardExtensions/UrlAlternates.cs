@@ -21,15 +21,13 @@ namespace AodlTheme.ShapeProviders
             _urlAlternates = new Lazy<List<string>>(() => {
                 var httpContext = httpContextAccessor.HttpContext;
 
-                if (httpContext == null) {
+                if (httpContext == null)
                     return null;
-                }
 
                 var request = httpContext.Request;
 
-                if (request == null) {
+                if (request == null)
                     return null;
-                }
 
                 // extract each segment of the url
                 var urlSegments = request.Path.Value
@@ -38,9 +36,8 @@ namespace AodlTheme.ShapeProviders
                     .Select(url => url.Replace("-", "__").Replace(".", "_")) // format the alternate
                     .ToArray();
 
-                if (String.IsNullOrWhiteSpace(urlSegments[0])) {
+                if (String.IsNullOrWhiteSpace(urlSegments[0]))
                     urlSegments[0] = "homepage";
-                }
 
                 return Enumerable.Range(1, urlSegments.Count()).Select(range => String.Join("__", urlSegments.Take(range))).ToList();;
             });
@@ -53,15 +50,11 @@ namespace AodlTheme.ShapeProviders
             context.ShapeMetadata.OnDisplaying(displayContext =>
             {
                 if (_urlAlternates.Value == null || !_urlAlternates.Value.Any())
-                {
                     return;
-                }
 
                 // prevent applying alternate again, c.f. https://github.com/OrchardCMS/Orchard/issues/2125
                 if (displayContext.ShapeMetadata.Alternates.Any(x => x.Contains("__url__")))
-                {
                     return;
-                }
 
                 // appends Url alternates to current ones
                 displayContext.ShapeMetadata.Alternates = new AlternatesCollection(displayContext.ShapeMetadata.Alternates.SelectMany(

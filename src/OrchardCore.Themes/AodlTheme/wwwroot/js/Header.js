@@ -35,10 +35,10 @@
             var protocol_host = window.location.protocol + "//" + window.location.host;
             var $bodyContent = $(".body-content");
             //closure returned
-            return function (controller, action) {
+            return function (path) {
                 $bodyContent.fadeOut(100, function () {
-                    console.log(protocol_host + "/" + controller + "/" + action);
-                    $bodyContent.load(protocol_host + "/" + controller + "/" + action).hide().fadeIn(1150);
+                    console.log(protocol_host + "/" + path);
+                    $bodyContent.load(protocol_host + "/" + path).hide().fadeIn(1150);
                 });
             };
         }());
@@ -53,38 +53,17 @@
             };
         }($));
 
-        function fadeInPartial(options) {
-            updateBodyContent(options.controller, options.action);
-            updateHeaderLinks(options.action);
+        function fadeInPartial(path) {
+            updateBodyContent(path);
+            updateHeaderLinks(path);
         };
 
         //expose closures by binding to onclick events of header links
         $(".headerLink").click(function () {
-            var action = $(this).data("headerlinkid").split('-')[0];
-            fadeInPartial({ controller: 'Home', action: action });
-        });
-    }());
-
-    (function navbar_horizontalOffsetUpdater() {
-        var titleBox = $('.title-box');
-        var smallScreenHeader = $('.navbar-header');
-        var navbarBrand = $(".navbar-brand");
-        //check titleBox width whenever window is resized and pad navbar accordingly
-        $(window).resize(function () {
-            if (window.innerWidth >= largeScreenWidth) {
-                smallScreenHeader.css("flex-basis", titleBox.outerWidth());
-            } else {
-                smallScreenHeader.css("flex-basis", "100%");
-            }
-        });
-        //and first time page has loaded
-        $(document).ready(function () {
-            if (window.innerWidth >= largeScreenWidth) {
-                smallScreenHeader.animate({ "flex-basis": titleBox.outerWidth() }, 1000);
-            } else {
-                smallScreenHeader.css("flex-basis", "100%");
-            }
+            var path = $(this).data("headerlinkdtargetid").split('-')[0];
+            fadeInPartial(path);
         });
     }());
 
 }());
+

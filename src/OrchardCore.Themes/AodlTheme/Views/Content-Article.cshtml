@@ -1,0 +1,20 @@
+
+<div class="customContainer">
+    <div class="articleTextContainer">
+        <section class="articleText">
+            @if (Model.Header != null)
+            {
+                <header>
+                    @await DisplayAsync(Model.Header)
+                </header>
+            }
+            @await DisplayAsync(Model.Content)
+        </section>
+    </div>
+</div>
+<div class="articleMediaContainer" style="height: 100%">
+    <div class="articleMedia"></div>
+    <small class="mediaDesc">Some information about it</small>
+</div>
+
+<section id="feauresSection"></section>
