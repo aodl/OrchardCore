@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\OrchardCore.Modules\ClassLibrary1\ClassLibrary1.csproj" />
     <ProjectReference Include="..\src\OrchardCore.Themes\AodlTheme\AodlTheme.csproj" />
     <ProjectReference Include="..\src\OrchardCore\OrchardCore.Application.Cms.Targets\OrchardCore.Application.Cms.Targets.csproj" />
   </ItemGroup>
