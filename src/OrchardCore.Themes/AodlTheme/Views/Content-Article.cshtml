@@ -1,22 +1,17 @@
 
-<section id="aboutSection" class="customContainer">    
+<section id="aboutSection" class="customContainer">
     <div class="aboutMedia">
-        <small>Some information about it</small>
-        <form>
-            <label>
-                <input data-media-url="/AodlTheme/img/adaptneticLandingLarge.png" type="radio" name="MediaSwitch" class="d-none" checked/>
-                <span></span>
-            </label>
-            <label>
-                <input data-media-url="/AodlTheme/img/diamondCubicTrussLanding.jpg" type="radio" name="MediaSwitch" class="d-none" />
-                <span></span>
-            </label>
-            <label>
-                <input data-media-url="/AodlTheme/img/adaptneticLandingLarge.png" type="radio" name="MediaSwitch" class="d-none" />
-                <span></span>
-            </label>
-        </form>
+        <div id="aboutMedia1" data-color="black" style="background: url(/AodlTheme/img/adaptneticLandingLarge.png) center no-repeat; background-size: cover;">
+            <small>Some information about it</small>
+        </div>    
+        <div id="aboutMedia2" data-color="transparent" class="d-none" style="background: url(/AodlTheme/img/diamondCubicTrussLanding.jpg) center no-repeat; background-size: cover;">
+            <small>Some information about it</small>
+        </div>    
+        <div id="aboutMedia3" class="d-none">
+            <small>Some information about it</small>
+        </div>
     </div>
+
     <section class="aboutText">
         @if (Model.Header != null)
         {
@@ -26,6 +21,20 @@
         }
         @await DisplayAsync(Model.Content)
     </section>
+    <form class="aboutMediaChooser">
+        <label>
+            <input data-target="#aboutMedia1" type="radio" name="MediaSwitch" class="d-none" checked/>
+            <span></span>
+        </label>
+        <label>
+            <input data-target="#aboutMedia2" type="radio" name="MediaSwitch" class="d-none" />
+            <span></span>
+        </label>
+        <label>
+            <input data-target="#aboutMedia3" type="radio" name="MediaSwitch" class="d-none" />
+            <span></span>
+        </label>
+    </form>
 </section>
 <section id="feauresSection" style="height: 700px;">
     <div class="customContainer" style="padding-top: 60px; padding-bottom: 60px;">

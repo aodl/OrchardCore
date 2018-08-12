@@ -73,12 +73,13 @@
         }
     });
 
-    $(".aboutMedia form").change(function (e, blah) {
-        var mediaUrl = $(e.target).attr("data-media-url");
-        $(this).closest(".aboutMedia").css({
-            "background": "url(" + mediaUrl + ") center no-repeat",
-            "background-size": "cover"
-        });
+    $(".aboutMediaChooser").change(function (e) {
+        var displays = $(".aboutMedia").children();
+        var selected = displays.filter($(e.target).attr("data-target"));
+        var color = selected.attr("data-color");
+        $(".aboutMedia").css("background-color", color);
+        displays.addClass("d-none");
+        selected.removeClass("d-none");
     });
 
 }());
