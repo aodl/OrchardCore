@@ -73,5 +73,13 @@
         }
     });
 
+    $(".aboutMedia form").change(function (e, blah) {
+        var mediaUrl = $(e.target).attr("data-media-url");
+        $(this).closest(".aboutMedia").css({
+            "background": "url(" + mediaUrl + ") center no-repeat",
+            "background-size": "cover"
+        });
+    });
+
 }());
 
