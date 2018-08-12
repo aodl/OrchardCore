@@ -1,20 +1,24 @@
 
-<div class="customContainer">
-    <div class="articleTextContainer">
-        <section class="articleText">
-            @if (Model.Header != null)
-            {
-                <header>
-                    @await DisplayAsync(Model.Header)
-                </header>
-            }
-            @await DisplayAsync(Model.Content)
-        </section>
+<section id="aboutSection" class="customContainer">    
+    <div class="aboutMedia">
+        <small>Some information about it</small>
     </div>
-</div>
-<div class="articleMediaContainer" style="height: 100%">
-    <div class="articleMedia"></div>
-    <small class="mediaDesc">Some information about it</small>
-</div>
-
-<section id="feauresSection"></section>
+    <section class="aboutText">
+        @if (Model.Header != null)
+        {
+            <header>
+                @await DisplayAsync(Model.Header)
+            </header>
+        }
+        @await DisplayAsync(Model.Content)
+    </section>
+</section>
+<section id="feauresSection" style="height: 700px;">
+    <div class="customContainer" style="padding-top: 60px; padding-bottom: 60px;">
+        <header style="color: white;">
+            @await DisplayAsync(Model.Header)
+        </header>
+    </div>
+</section>
+<section id="linkSection" style="height: 300px;"></section>
+<section id="contactSection" style="height: 700px;"></section>

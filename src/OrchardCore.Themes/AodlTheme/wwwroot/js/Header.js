@@ -65,5 +65,13 @@
         });
     }());
 
+    $(".bodyScroll").scroll(function () {
+        if ($(this).scrollTop() > 99) {
+            $(".title-box").addClass('title-box-small');
+        } else {
+            $(".title-box").removeClass('title-box-small');
+        }
+    });
+
 }());
 

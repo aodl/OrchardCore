@@ -1,7 +1,7 @@
-﻿[
+[
   {
-    "outputFile": "wwwroot/css/Header.css",
-    "inputFile": "wwwroot/css/Header.scss"
+    "inputFile": "wwwroot/css/Header.scss",
+    "outputFile": "wwwroot/css/Header.css"
   },
   {
     "outputFile": "wwwroot/css/menu.css",

@@ -76,7 +76,7 @@ body {
   margin: 0 0 4px 0; }
 
 @media (min-width: 768px) and (min-height: 701px) {
-  .title-box > h1, .title-box > h2, .title-box > h3 {
+  .title-box:not(.title-box-small) > h1, .title-box:not(.title-box-small) > h2, .title-box:not(.title-box-small) > h3 {
     line-height: 150%;
     transition: line-height 0.5s; } }
 
