@@ -78,6 +78,27 @@
     & > small:after {
         content: ' >';
     }
+
+    & > form {
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        text-align: center;
+
+        & label > span {
+            margin: 7px;
+            display: inline-block;
+            height: 10px;
+            width: 10px;
+            background-color: transparent;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+
+        & label > input:checked ~ span {
+            background-color: white;
+        }
+    }
 }
 
 body {
@@ -135,6 +156,9 @@ body {
 @media (max-width: $sm-max){
     .bodyScroll {
         background-color: black;
+    }
+    .aboutText {
+        filter: invert(100%);
     }
 }
 
