@@ -3,11 +3,15 @@
 .aboutMedia {
     top: 0;
     order: 1;
-    padding-bottom: 5px;
     background-color: black;
+    & > * {
+        margin-bottom: 5px;
+        bottom: 0px;
+    }
 }
 
 .aboutMedia, .aboutMediaChooser {
+    transition: background-color 0.5s;
     position: absolute;
     bottom: 0;
     right: 0px;
@@ -27,6 +31,7 @@
         height: 12px;
         width: 12px;
         background-color: transparent;
+        transition: background-color 0.5s;
         border: 1px solid white;
         box-shadow: 0 0 3px 0 black;
         border-radius: 3px;
@@ -84,8 +89,14 @@
 }
 
 @media (max-width: $sm-max) {
-    .aboutMediaChooser, .aboutMedia {
+    .aboutMediaChooser {
+        margin-top: -50px;
+        z-index: 500;
         position: static;
+        width: 100%;
+    }
+    .aboutMedia {
+        position: relative;
         width: 100%;
     }
     .aboutMedia {

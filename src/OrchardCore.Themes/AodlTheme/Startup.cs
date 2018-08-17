@@ -13,7 +13,7 @@ namespace AodlTheme
         // This method gets called by the runtime. Use this method to add services to the container.
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IShapeDisplayEvents,AjaxAlternatesFactory>();
+            services.AddScoped<IShapeDisplayEvents,GeneralAlternatesFactory>();
             //services.AddScoped<IShapeDisplayEvents,UrlAlternatesFactory>();
         }
     }

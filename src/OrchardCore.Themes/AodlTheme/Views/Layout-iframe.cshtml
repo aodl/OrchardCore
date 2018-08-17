@@ -1,0 +1,30 @@
+@inject OrchardCore.Settings.ISiteService SiteService
+@{
+    var site = await SiteService.GetSiteSettingsAsync();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@RenderTitleSegments(site.SiteName, "before")</title>
+    <link type="image/x-icon" rel="shortcut icon" href="/TheTheme/favicon.ico" />
+    <script asp-name="bootstrap" use-cdn="true" version="4" at="Foot"></script>
+    <style asp-name="bootstrap" use-cdn="true" version="4"></style>
+    <style asp-src="/AodlTheme/css/menu.min.css"></style>
+    <style asp-src="/AodlTheme/css/Page.min.css"></style>
+    <resources type="Meta" />
+    <resources type="HeadLink" />
+    <resources type="Stylesheet" />
+    <resources type="HeadScript" />
+</head>
+<body>
+    <div class="container">
+        @await RenderBodyAsync()
+    </div>
+    
+    @*<script src="/TheAgencyTheme/vendor/jquery/jquery.min.js"></script>*@
+    <resources type="FootScript" />
+    <script src="/AodlTheme/js/Header.js"></script>
+</body>
+</html>

@@ -30,7 +30,7 @@ body {
   overflow-y: auto;
   position: absolute;
   right: 1px;
-  bottom: 0;
+  height: 100%;
   top: 35px;
   z-index: -1; }
 
@@ -80,7 +80,7 @@ body {
     line-height: 150%;
     transition: line-height 0.5s; } }
 
-@media (max-width: 480px), (max-height: 500px) {
+@media (max-width: 768px), (max-height: 500px) {
   .title-box {
     display: none; } }
 
@@ -179,7 +179,7 @@ body {
     max-height: 40px; } }
 
 #navBarDropdown {
-  z-index: 1000;
+  z-index: 2000;
   background-color: black;
   min-width: 160px;
   font-size: 14px;
@@ -192,6 +192,8 @@ body {
 
 @media (min-width: 768px) {
   #navBarDropdown {
+    border: 1px solid #222;
+    border-top: none;
     float: none;
     width: auto;
     margin-top: 0;
@@ -201,7 +203,7 @@ body {
     #navBarDropdown > li > a {
       line-height: 20px; } }
 
-@media (max-width: 480px), (max-height: 500px) {
+@media (max-width: 768px), (max-height: 500px) {
   .navbar-brand {
     animation-name: fadeIn;
     animation-timing-function: cubic-bezier(1, 0, 0.5, 1);

@@ -8,13 +8,13 @@
 
 @if (level > 0)
 { 
-    <a href="#" class="dropdown-item headerLink" data-headerlinkdtargetid="Drop-link" data-headerlink="@Url.Content((string)linkMenuItemPart.Url)">@linkMenuItemPart.Name</a>
+    <a class="dropdown-item headerLink" data-headerlinkdtargetid="Drop-link" data-headerlink="@Url.Content((string)linkMenuItemPart.Url)">@linkMenuItemPart.Name</a>
 }
 else if ((bool)(Model.HasItems))
 {
-    <a href="#" class="nav-link dropdown-toggle headerLinkTarget" id="Drop-link" data-toggle="dropdown"  data-headerlink="@Url.Content((string)linkMenuItemPart.Url)">@linkMenuItemPart.Name<span class="caret"></span></a>
+    <a class="nav-link dropdown-toggle headerLinkTarget" id="Drop-link" data-toggle="dropdown"  data-headerlink="@Url.Content((string)linkMenuItemPart.Url)">@linkMenuItemPart.Name<span class="caret"></span></a>
 }
 else
 {
-    <a href="#" class="nav-link headerLink headerLinkTarget" id="@linkMenuItemPart.Name-link" data-headerlinkdtargetid="@linkMenuItemPart.Name-link" data-headerlink="@Url.Content((string)linkMenuItemPart.Url)">@linkMenuItemPart.Name</a>
+    <a class="nav-link headerLink headerLinkTarget" data-blah="#linkSection" id="@linkMenuItemPart.Name-link" data-headerlinkdtargetid="@linkMenuItemPart.Name-link" data-headerlink="@Url.Content((string)linkMenuItemPart.Url)">@linkMenuItemPart.Name</a>
 }
