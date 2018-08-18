@@ -1,10 +1,10 @@
 [
   {
-    "outputFile": "wwwroot/css/menu.css",
-    "inputFile": "wwwroot/css/menu.scss"
+    "inputFile": "wwwroot/css/menu.scss",
+    "outputFile": "wwwroot/css/menu.css"
   },
   {
-    "outputFile": "wwwroot/css/Page.css",
-    "inputFile": "wwwroot/css/Page.scss"
+    "inputFile": "wwwroot/css/Page.scss",
+    "outputFile": "wwwroot/css/Page.css"
   }
 ]

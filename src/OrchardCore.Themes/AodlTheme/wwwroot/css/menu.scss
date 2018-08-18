@@ -147,8 +147,8 @@ body {
     flex-wrap: nowrap;
 }
 .socialIcon {
-    float: right;
     display: inline;
+    float: right;
     padding: 0;
     & > img {
         padding: 7px;
@@ -158,9 +158,16 @@ body {
     transition: filter 0.5s;
     filter: brightness(1.7);
 }
-@media (min-width: $md-min) and (max-width: $lg-max){
-    .socialIconContainer {
+.socialIconContainer {
+    transition: width 0.2s linear;
+    max-height: 40px;
+    margin: 0;
+    width: 100%; 
+    @media (min-width: $md-min) and (max-width: $lg-max) {
         width: 30px;
+    }
+    & > li {
+        float: right;
     }
 }
 

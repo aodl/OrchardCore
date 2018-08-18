@@ -1,47 +1,50 @@
 
-<section id="aboutSection" class="customContainer">
-    <div class="aboutMedia">
-        <div id="aboutMedia1" data-color="black" style="position: absolute; background: url(/AodlTheme/img/adaptneticLandingLarge.png) center no-repeat; background-size: cover;">
-            <small>Some information about it</small>
-        </div>    
-        <div id="aboutMedia2" data-color="transparent"  style="display: none; position: absolute; background: url(/AodlTheme/img/diamondCubicTrussLanding.jpg) center no-repeat; background-size: cover;">
-            <small>Some information about it</small>
-        </div>    
-        <div id="aboutMedia3" style="display: none; position: absolute;">@*bottom zero px so that aboutMedia bottom padding is repspected*@
-            <small>Some information about it</small>
+<div class="zebraSections">
+    <section id="aboutSection" class="zebraSection customContainer">
+        <div class="aboutMedia">
+            <div id="aboutMedia1" data-color="black" style="position: absolute; background: url(/AodlTheme/img/adaptneticLandingLarge.png) center no-repeat; background-size: cover;">
+                <small>Some information about it</small>
+            </div>    
+            <div id="aboutMedia2" data-color="transparent"  style="display: none; position: absolute; background: url(/AodlTheme/img/diamondCubicTrussLanding.jpg) center no-repeat; background-size: cover;">
+                <small>Some information about it</small>
+            </div>    
+            <div id="aboutMedia3" style="display: none; position: absolute;">@*bottom zero px so that aboutMedia bottom padding is repspected*@
+                <small>Some information about it</small>
+            </div>
         </div>
-    </div>
 
-    <section class="aboutText">
-        @if (Model.Header != null)
-        {
-            <header>
+        <section class="aboutText">
+            @if (Model.Header != null)
+            {
+                <header>
+                    @await DisplayAsync(Model.Header)
+                </header>
+            }
+            @await DisplayAsync(Model.Content)
+        </section>
+        <form class="aboutMediaChooser">
+            <label>
+                <input data-target="#aboutMedia1" type="radio" name="MediaSwitch" class="d-none" checked/>
+                <span></span>
+            </label>
+            <label>
+                <input data-target="#aboutMedia2" type="radio" name="MediaSwitch" class="d-none" />
+                <span></span>
+            </label>
+            <label>
+                <input data-target="#aboutMedia3" type="radio" name="MediaSwitch" class="d-none" />
+                <span></span>
+            </label>
+        </form>
+    </section>
+    <section class="zebraSection" id="blogSummarySection" style="height: 700px;">
+        <div class="customContainer" style="padding-top: 60px; padding-bottom: 60px;">
+            <header style="color: white;">
                 @await DisplayAsync(Model.Header)
             </header>
-        }
-        @await DisplayAsync(Model.Content)
+        </div>
     </section>
-    <form class="aboutMediaChooser">
-        <label>
-            <input data-target="#aboutMedia1" type="radio" name="MediaSwitch" class="d-none" checked/>
-            <span></span>
-        </label>
-        <label>
-            <input data-target="#aboutMedia2" type="radio" name="MediaSwitch" class="d-none" />
-            <span></span>
-        </label>
-        <label>
-            <input data-target="#aboutMedia3" type="radio" name="MediaSwitch" class="d-none" />
-            <span></span>
-        </label>
-    </form>
-</section>
-<section id="feauresSection" style="height: 700px;">
-    <div class="customContainer" style="padding-top: 60px; padding-bottom: 60px;">
-        <header style="color: white;">
-            @await DisplayAsync(Model.Header)
-        </header>
-    </div>
-</section>
-<section id="linkSection" style="height: 300px;"></section>
-<section id="contactSection" style="height: 700px;"></section>
+    <section class="zebraSection" id="projSummarySection" style="height: 300px;"></section>
+    <section class="zebraSection" id="featuresSection" style="height: 700px;"></section>
+    <section class="zebraSection" id="contactSection" style="height: 700px;"></section>
+</div>

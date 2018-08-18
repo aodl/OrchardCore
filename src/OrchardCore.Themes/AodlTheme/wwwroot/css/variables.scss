@@ -28,11 +28,11 @@ $navbar-height: 35px;
 //boostrap 4 sizes
 $sm-min: 576px;
 $sm-max: 768px;
-$md-min: $sm-max + 1;
+$md-min: $sm-max;
 $md-max: 991px;
-$lg-min: $md-max + 1;
+$lg-min: $md-max;
 $lg-max: 1200px;
-$xl-min: $lg-max + 1;
+$xl-min: $lg-max;
 
 @mixin atLargetScreenWidth {
     @media (min-width: #{$larger-screen-width + 1}) {

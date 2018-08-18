@@ -1,20 +1,8 @@
 [
   {
-    "outputFileName": "wwwroot/css/clean-blog-orchard.min.css",
-    "inputFiles": [
-      "wwwroot/css/clean-blog-orchard.css"
-    ]
-  },
-  {
     "outputFileName": "wwwroot/css/menu.min.css",
     "inputFiles": [
       "wwwroot/css/menu.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/css/Header.min.css",
-    "inputFiles": [
-      "wwwroot/css/Header.css"
     ]
   },
   {

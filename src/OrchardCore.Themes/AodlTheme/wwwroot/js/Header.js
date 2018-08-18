@@ -81,7 +81,7 @@
             var scrollable = $(this);
 
             var scrollableOffset = scrollable.offset().top;
-            var scrollTop = $("#linkSection").offset().top - scrollableOffset;
+            var scrollTop = $("#projSummarySection").offset().top - scrollableOffset;
             if (hasPageBeenScaled()) {
                 scrollTop *= 1 / scale;
             }

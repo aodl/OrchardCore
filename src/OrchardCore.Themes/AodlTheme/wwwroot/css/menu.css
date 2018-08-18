@@ -115,8 +115,8 @@ body {
   flex-wrap: nowrap; }
 
 .socialIcon {
-  float: right;
   display: inline;
+  float: right;
   padding: 0; }
   .socialIcon > img {
     padding: 7px; }
@@ -125,9 +125,16 @@ body {
   transition: filter 0.5s;
   filter: brightness(1.7); }
 
-@media (min-width: 769px) and (max-width: 1200px) {
-  .socialIconContainer {
-    width: 30px; } }
+.socialIconContainer {
+  transition: width 0.2s linear;
+  max-height: 40px;
+  margin: 0;
+  width: 100%; }
+  @media (min-width: 768px) and (max-width: 1200px) {
+    .socialIconContainer {
+      width: 30px; } }
+  .socialIconContainer > li {
+    float: right; }
 
 .navbar {
   background-color: black;
