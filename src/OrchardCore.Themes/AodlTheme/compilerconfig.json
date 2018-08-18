@@ -1,9 +1,5 @@
 [
   {
-    "inputFile": "wwwroot/css/Header.scss",
-    "outputFile": "wwwroot/css/Header.css"
-  },
-  {
     "outputFile": "wwwroot/css/menu.css",
     "inputFile": "wwwroot/css/menu.scss"
   },
