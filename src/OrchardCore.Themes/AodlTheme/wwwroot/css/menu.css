@@ -121,18 +121,24 @@ body {
   .socialIcon > img {
     padding: 7px; }
 
-.socialIcon:hover {
+.socialIcon {
   transition: filter 0.5s;
-  filter: brightness(1.7); }
+  transition: padding 0.5s; }
+  .socialIcon:hover {
+    filter: brightness(1.7);
+    padding-left: 1px;
+    padding-right: 1px; }
 
 .socialIconContainer {
-  transition: width 0.2s linear;
+  transition: width 0.5s linear;
   max-height: 40px;
   margin: 0;
   width: 100%; }
   @media (min-width: 768px) and (max-width: 1200px) {
     .socialIconContainer {
-      width: 30px; } }
+      width: 30px; }
+      .socialIconContainer .socialIcon:hover {
+        padding: 1px 0 1px 0; } }
   .socialIconContainer > li {
     float: right; }
 

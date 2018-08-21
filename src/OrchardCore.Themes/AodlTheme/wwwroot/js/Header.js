@@ -56,47 +56,87 @@
             //closure returned
             return function (action) {
                 $headerLinkTargets.removeClass("active");
-                $headerLinkTargets.filter("#" + action + "-link").addClass("active");
+                if (action != null) {
+                    $headerLinkTargets.filter("#" + action + "-link").addClass("active");
+                }
             };
         }($));
 
-        function scrollTo(selector) {
-            var scrollable = $('.bodyScroll');
-            var scrollableOffset = scrollable.offset().top;
-
-            var scrollTop = $(selector).offset().top - scrollableOffset;
-            if (hasPageBeenScaled()) {
-                scrollTop *= 1 / scale;
-            }
-            scrollTop += scrollable.scrollTop();
-            scrollable.animate({ scrollTop: scrollTop }, 'slow');
-        }
 
         function fadeInPartial(path) {
             updateBodyContent(path);
         }
 
-        $(".bodyScroll").scroll(function ()
-        {
-            var scrollable = $(this);
+        $(function () {
+            var currentlyAutoScrolling = false;
+            var scrollable = $('.bodyScroll');
 
-            var scrollableOffset = scrollable.offset().top;
-            var scrollTop = $("#projSummarySection").offset().top - scrollableOffset;
-            if (hasPageBeenScaled()) {
-                scrollTop *= 1 / scale;
-            }
-            scrollTop += scrollable.scrollTop();
-            if (scrollable.scrollTop() >= Math.floor(scrollTop)) {
-                updateHeaderLinks("Features");
-            }
-        });
+            function scrollTo(selector, after) {
+                var scrollableOffset = scrollable.offset().top;
 
-        //expose closures by binding to onclick events of header links
-        $(".headerLink").click(function () {
-            var action = $(this).data("headerlinkdtargetid").split('-')[0];
-            scrollTo($(this).data("blah"));
-            //fadeInPartial(action);
-        });
+                var scrollTop = $(selector).offset().top - scrollableOffset;
+                if (hasPageBeenScaled()) {
+                    scrollTop *= 1 / scale;
+                }
+                scrollTop += scrollable.scrollTop();
+                scrollable.animate({ scrollTop: scrollTop }, 'slow', 'swing', after);
+            }
+
+            (function () {
+                var scrollableOffset = scrollable.offset().top;
+                var scrollTargets = $(".scrollToSection").map(function (i, el) {
+                    var id = $(el).attr("id");
+                    var correspondingNavLink = $("a[data-fragment=" + id + "]");
+                    var headerLinkTargetId = correspondingNavLink.data("headerlinkdtargetid");
+                    return {
+                        action: headerLinkTargetId === undefined ? null : headerLinkTargetId.split('-')[0],
+                        scrollTheshFromTop: $("#" + id).offset().top - scrollableOffset
+                    };
+                });
+
+                $(".bodyScroll").scroll(function () {
+                    if (currentlyAutoScrolling) {
+                        return;
+                    }
+                    var viewportHeight = $(window).innerHeight();
+                    scrollTargets.each(function (i, el) {
+                        var scrollTop = el.scrollTheshFromTop;
+                        if (hasPageBeenScaled()) {
+                            scrollTop *= 1 / scale;
+                        }
+                        if (scrollable.scrollTop() + (viewportHeight / 4) >= Math.floor(scrollTop)) {// if id element in top quarter of viewport
+                            updateHeaderLinks(el.action);
+                        }
+                    });
+                });
+            }());
+
+            //expose closures by binding to onclick events of header links
+            $(".headerLink").click(function () {
+                var action = $(this).data("headerlinkdtargetid").split('-')[0];
+                var fragOrUndef = $(this).data("fragment");
+                if (fragOrUndef) {// then should scroll to place on this page
+                    currentlyAutoScrolling = true;
+                    scrollTo("#" + fragOrUndef, function () {
+                        currentlyAutoScrolling = false;
+                    });
+                    updateHeaderLinks(action);
+                } else {// then should fade in new partial from server
+                    fadeInPartial(action);
+                }
+            });
+            $(".title-box .navbar-brand").click(function () {
+                scrollable.animate({ scrollTop: 0 }, 'slow', 'swing');
+            });
+
+            scrollable.bind('scroll mousedown wheel DOMMouseScroll mousewheel keyup touchstart', function (e) {
+                if (e.which > 0 || e.type == "mousedown" || e.type == "mousewheel" || e.type == 'touchstart') {
+                    scrollable.stop();
+                    currentlyAutoScrolling = false;
+                }
+            })
+        }());
+
     }());
 
 
@@ -115,8 +155,6 @@
         $(".aboutMedia").css("background-color", color);
         displays.fadeOut();
         selected.fadeIn();
-        //displays.addClass("d-none");
-        //selected.removeClass("d-none");
     });
 
 }());
