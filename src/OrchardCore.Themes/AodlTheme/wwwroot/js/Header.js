@@ -1,4 +1,5 @@
 (function () {
+    var partialLoadEventStr = "aodlPartialLoad";
     var largeScreenWidth = 768;
     var largestScreenWidth = 1600;
     var scale = window.innerWidth / largestScreenWidth;
@@ -44,8 +45,10 @@
             //closure returned
             return function (path) {
                 $bodyContent.fadeOut(100, function () {
-                    console.log(protocol_host + "/" + path);
-                    $bodyContent.load(protocol_host + "/" + path).hide().fadeIn(1150);
+                    $bodyContent.load(protocol_host + "/" + path, function () {
+                        $(this).trigger(partialLoadEventStr);
+                        $(this).hide().fadeIn(1150);
+                    });
                 });
             };
         }());
@@ -71,28 +74,44 @@
             var currentlyAutoScrolling = false;
             var scrollable = $('.bodyScroll');
 
-            function scrollTo(selector, after) {
-                var scrollableOffset = scrollable.offset().top;
+            function scrollToOrFadeIn(selector, action, after) {
 
-                var scrollTop = $(selector).offset().top - scrollableOffset;
-                if (hasPageBeenScaled()) {
-                    scrollTop *= 1 / scale;
+                if (selector) {
+                    var element = $("#" + selector);
+                    if (element.length > 0) {
+                        var scrollableOffset = scrollable.offset().top;
+
+                        var scrollTop = element.offset().top - scrollableOffset;
+                        if (hasPageBeenScaled()) {
+                            scrollTop *= 1 / scale;
+                        }
+                        scrollTop += scrollable.scrollTop();
+                        scrollable.animate({ scrollTop: scrollTop }, 'slow', 'swing', after);
+
+                        return;
+                    }
                 }
-                scrollTop += scrollable.scrollTop();
-                scrollable.animate({ scrollTop: scrollTop }, 'slow', 'swing', after);
+
+                fadeInPartial(action);
             }
 
             (function () {
                 var scrollableOffset = scrollable.offset().top;
-                var scrollTargets = $(".scrollToSection").map(function (i, el) {
-                    var id = $(el).attr("id");
-                    var correspondingNavLink = $("a[data-fragment=" + id + "]");
-                    var headerLinkTargetId = correspondingNavLink.data("headerlinkdtargetid");
-                    return {
-                        action: headerLinkTargetId === undefined ? null : headerLinkTargetId.split('-')[0],
-                        scrollTheshFromTop: $("#" + id).offset().top - scrollableOffset
-                    };
-                });
+                var scrollTargets;
+                function reloadScrollTargets() {
+                    scrollTargets = $(".scrollToSection").map(function (i, el) {
+                        var id = $(el).attr("id");
+                        var correspondingNavLink = $("a[data-fragment=" + id + "]");
+                        var headerLinkTargetId = correspondingNavLink.data("headerlinkdtargetid");
+                        return {
+                            action: headerLinkTargetId === undefined ? null : headerLinkTargetId.split('-')[0],
+                            scrollTheshFromTop: $("#" + id).offset().top - scrollableOffset
+                        };
+                    });
+                }
+                reloadScrollTargets();
+
+                $(".body-content").on(partialLoadEventStr, reloadScrollTargets);
 
                 $(".bodyScroll").scroll(function () {
                     if (currentlyAutoScrolling) {
@@ -115,15 +134,11 @@
             $(".headerLink").click(function () {
                 var action = $(this).data("headerlinkdtargetid").split('-')[0];
                 var fragOrUndef = $(this).data("fragment");
-                if (fragOrUndef) {// then should scroll to place on this page
-                    currentlyAutoScrolling = true;
-                    scrollTo("#" + fragOrUndef, function () {
-                        currentlyAutoScrolling = false;
-                    });
-                    updateHeaderLinks(action);
-                } else {// then should fade in new partial from server
-                    fadeInPartial(action);
-                }
+                currentlyAutoScrolling = true;
+                scrollToOrFadeIn(fragOrUndef, action, function () {
+                    currentlyAutoScrolling = false;
+                });
+                updateHeaderLinks(action);
             });
             $(".title-box .navbar-brand").click(function () {
                 scrollable.animate({ scrollTop: 0 }, 'slow', 'swing');
