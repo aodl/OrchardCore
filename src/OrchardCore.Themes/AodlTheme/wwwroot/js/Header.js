@@ -1,8 +1,9 @@
 (function () {
-    var partialLoadEventStr = "aodlPartialLoad";
     var largeScreenWidth = 768;
     var largestScreenWidth = 1600;
     var scale = window.innerWidth / largestScreenWidth;
+    var scrollable = $('.bodyScroll');
+    var currentlyAutoScrolling = false;
 
     function hasPageBeenScaled() { return window.innerWidth > largestScreenWidth; }
 
@@ -42,14 +43,11 @@
             //private variables
             var protocol_host = window.location.protocol + "//" + window.location.host;
             //closure returned
-            return function (path, $bodyContent, addToCacheFunc) {
-                $bodyContent.fadeOut(100, function () {
-                    $bodyContent.load(protocol_host + "/" + path, function () {
-                        $(this).trigger(partialLoadEventStr);
-                        $(this).fadeIn(1150);
-                        addToCacheFunc($(this).html());
-                    });
-                });
+            return function (path, callback) {
+                $.ajax({
+                    url: protocol_host + "/" + path,
+                    success: callback
+                })
             };
         }());
 
@@ -65,30 +63,29 @@
             };
         }($));
 
-        var fadeInPartial = (function () {
-            var alreadyLoadedCache = {};// object keys will be "[path]", value will be [pageContent]
-            var container = $(".body-content");
+        partialCache = (function () {
+            var _alreadyLoadedCache = {};// object keys will be "[path]", value will be [pageContent]
 
-            return function (path) {
-                cachedContent = alreadyLoadedCache[path];
-                if (cachedContent) {// then use cached content
-                    container.fadeOut(100, function () {
-                        $(this).html(cachedContent);
-                        $(this).fadeIn(1150);
-                    });
-                } else {// then get content from server, and cache it
-                    ajaxBodyContent(path, container, function (responseContent) {
-                        alreadyLoadedCache[path] = responseContent;
-                    });
-                }
+            function _getOrAdd(path, detachCurr, attachPartial) {
+                detachCurr(function () {
+                    if (_alreadyLoadedCache[path]) {
+                        attachPartial(_alreadyLoadedCache[path]);
+                    } else {
+                        ajaxBodyContent(path, function (responseContent) {
+                            attachPartial(responseContent, function (attachedPartial) {
+                                _alreadyLoadedCache[path] = attachedPartial;
+                            });
+                        });
+                    }
+                });
+            }
 
+            return {
+                getOrAdd: _getOrAdd
             };
         }());
 
         $(function () {
-            var currentlyAutoScrolling = false;
-            var scrollable = $('.bodyScroll');
-
             function clickScrollAnimation(scrollable, toPosition, after) {
                 scrollable.animate({ scrollTop: toPosition }, {
                     duration: "slow",
@@ -102,75 +99,90 @@
                 });
             }
 
+            function scrollTo(element, after) {
+                currentlyAutoScrolling = true;
 
-            function scrollToOrFadeIn(selector, path, after) {
+                var scrollableOffset = scrollable.offset().top;
 
-                if (selector) {
-                    var element = $("#" + selector);
-                    if (element.length > 0) {
-                        var scrollableOffset = scrollable.offset().top;
-
-                        var scrollTop = element.offset().top - scrollableOffset;
-                        if (hasPageBeenScaled()) {
-                            scrollTop *= 1 / scale;
-                        }
-                        scrollTop += scrollable.scrollTop();
-                        clickScrollAnimation(scrollable, scrollTop, after);
-                        return;
-                    }
+                var scrollTop = element.offset().top - scrollableOffset;
+                if (hasPageBeenScaled()) {
+                    scrollTop *= 1 / scale;
                 }
-
-                fadeInPartial(path);
+                scrollTop += scrollable.scrollTop();
+                clickScrollAnimation(scrollable, scrollTop, function(){
+                    currentlyAutoScrolling = false;
+                    if (after)
+                        after();
+                });
             }
 
-            (function () {
-                var scrollableOffset = scrollable.offset().top;
-                var scrollTargets;
-                function reloadScrollTargets() {
-                    scrollTargets = $(".scrollToSection").map(function (i, el) {
-                        var id = $(el).attr("id");
-                        var correspondingNavLink = $("a[data-fragment=" + id + "]");
-                        var headerLinkTargetId = correspondingNavLink.data("headerlinkdtargetid");
-                        return {
-                            linkName: headerLinkTargetId === undefined ? null : headerLinkTargetId.split('-')[0],
-                            scrollTheshFromTop: $("#" + id).offset().top - scrollableOffset
-                        };
-                    });
-                }
-                reloadScrollTargets();
+            var fadeInPartial = (function () {
+                var alreadyLoadedCache = {};// object keys will be "[path]", value will be [pageContent]
+                var container = $(".body-content");
 
-                $(".body-content").on(partialLoadEventStr, reloadScrollTargets);
+                return function (path, after) {
+                    var temp = path.split('#');
+                    var serverPath = temp[0];
+                    var fragment = temp[1];
+                    var originalOpacity = container.css("opacity");
 
-                $(".bodyScroll").scroll(function () {
-                    if (currentlyAutoScrolling) {
-                        return;
-                    }
-                    var viewportHeight = $(window).innerHeight();
-                    scrollTargets.each(function (i, el) {
-                        var scrollTop = el.scrollTheshFromTop;
-                        if (hasPageBeenScaled()) {
-                            scrollTop *= 1 / scale;
+                    partialCache.getOrAdd(
+                        serverPath,
+                        function fadeOut(after) {
+                            container.animate({ opacity: 0 }, {
+                                duration: 100,
+                                complete: after
+                            });
+                        },
+                        function swapFadeIn(content, afterPartialAttached) {
+                            container.children().detach();
+                            container.append(content);
+                            if (fragment) {
+                                var element = $("#" + fragment);
+                                if (element.length > 0) {
+                                    scrollTo(element);
+                                }
+                            }
+                            container.animate({ opacity: originalOpacity }, {
+                                duration: 1150, complete: function () {
+                                    if (after)
+                                        after();
+                                    if (afterPartialAttached)
+                                        afterPartialAttached(container.contents());
+                                }
+                            });
                         }
-                        if (scrollable.scrollTop() + (viewportHeight / 4) >= Math.floor(scrollTop)) {// if id element in top quarter of viewport
-                            updateHeaderLinks(el.linkName);
-                        }
-                    });
-                });
+                    );
+                };
             }());
 
+
+            function scrollToOrFadeIn(fragment, path, after) {
+
+                if (fragment) {
+                    var element = $("#" + fragment);
+                    if (element.length > 0) {
+                        scrollTo(element, after);
+                        return;
+                    }
+                }
+
+                fadeInPartial(path, after);
+            }
+
             //expose closures by binding to onclick events of header links
-            $(".headerLink").click(function () {
+            $(".headerLink").click(function (event, customAfter) {
                 var linkName = $(this).data("headerlinkdtargetid").split('-')[0];
                 var path = $(this).data("headerlink");
                 var fragOrUndef = $(this).data("fragment");
-                currentlyAutoScrolling = true;
-                scrollToOrFadeIn(fragOrUndef, path, function () {
-                    currentlyAutoScrolling = false;
-                });
+                scrollToOrFadeIn(fragOrUndef, path, customAfter);
                 updateHeaderLinks(linkName);
             });
             $(".title-box .navbar-brand").click(function () {
                 clickScrollAnimation(scrollable, 0);
+            });
+            $(".navbar-brand").first().trigger("click", function () {
+                indexPageSetup(updateHeaderLinks);
             });
 
             scrollable.bind('scroll mousedown wheel DOMMouseScroll mousewheel keyup touchstart', function (e) {
@@ -191,14 +203,46 @@
         }
     });
 
-    $(".aboutMediaChooser").change(function (e) {
-        var displays = $(".aboutMedia").children();
-        var selected = displays.filter($(e.target).attr("data-target"));
-        var color = selected.attr("data-color");
-        $(".aboutMedia").css("background-color", color);
-        displays.fadeOut();
-        selected.fadeIn();
-    });
+
+    function indexPageSetup(updateHeaderLinks) {
+        (function () {
+            var scrollableOffset = scrollable.offset().top;
+            var scrollTargets = $(".scrollToSection").map(function (i, el) {
+                var id = $(el).attr("id");
+                var correspondingNavLink = $("a[data-fragment=" + id + "]");
+                var headerLinkTargetId = correspondingNavLink.data("headerlinkdtargetid");
+                return {
+                    linkName: headerLinkTargetId === undefined ? null : headerLinkTargetId.split('-')[0],
+                    scrollTheshFromTop: $("#" + id).offset().top - scrollableOffset
+                };
+            });
+            
+            $(".bodyScroll").scroll(function () {
+                if (currentlyAutoScrolling) {
+                    return;
+                }
+                var viewportHeight = $(window).innerHeight();
+                scrollTargets.each(function (i, el) {
+                    var scrollTop = el.scrollTheshFromTop;
+                    if (hasPageBeenScaled()) {
+                        scrollTop *= 1 / scale;
+                    }
+                    if (scrollable.scrollTop() + (viewportHeight / 4) >= Math.floor(scrollTop)) {// if id element in top quarter of viewport
+                        updateHeaderLinks(el.linkName);
+                    }
+                });
+            });
+        }());
+
+        $(".aboutMediaChooser").change(function (e) {
+            var displays = $(".aboutMedia").children();
+            var selected = displays.filter($(e.target).attr("data-target"));
+            var color = selected.attr("data-color");
+            $(".aboutMedia").css("background-color", color);
+            displays.fadeOut();
+            selected.fadeIn();
+        });
+    }
 
 }());
 
