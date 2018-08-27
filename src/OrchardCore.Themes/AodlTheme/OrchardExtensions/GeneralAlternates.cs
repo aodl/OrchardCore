@@ -1,35 +1,30 @@
 using Microsoft.AspNetCore.Http;
-using OrchardCore;
-using OrchardCore.ContentManagement;
-using OrchardCore.DisplayManagement.Descriptors;
+using Microsoft.AspNetCore.Routing;
 using OrchardCore.DisplayManagement.Implementation;
-using OrchardCore.DisplayManagement.Shapes;
-using System.Collections.Generic;
 using System.Linq;
 using System;
-using System.Web;
 using System.Threading.Tasks;
 
 namespace AodlTheme.ShapeProviders
 {
     public class GeneralAlternatesFactory : IShapeDisplayEvents
     {
-        private (string templateSuffix, Func<HttpRequest, bool> predicate)[] alternateFactoryComponents = 
-            new (string templateSuffix, Func<HttpRequest, bool> predicate)[]{
+        private (string templateSuffix, Func<HttpContext, bool> predicate)[] alternateFactoryComponents = 
+            new (string templateSuffix, Func<HttpContext, bool> predicate)[]{
                 (
                     templateSuffix: "__ajax", 
-                    predicate: request => request.Headers != null && request.Headers["X-Requested-With"] == "XMLHttpRequest"
+                    predicate: httpContext => httpContext.Request.Headers != null && httpContext.Request.Headers["X-Requested-With"] == "XMLHttpRequest"
                 ),
                 (
-                    templateSuffix: "__iframe", 
-                    predicate: request => request.Query["iframe"].Any(s => bool.TryParse(s, out var result))
+                    templateSuffix: "__noncontent", 
+                    predicate: httpContext => httpContext.GetRouteValue("area").ToString() != "OrchardCore.Contents"
                 )
             };
 
-        private HttpRequest request;
+        private HttpContext httpContext;
 
         public GeneralAlternatesFactory(IHttpContextAccessor httpContextAccessor) {
-            request = httpContextAccessor.HttpContext.Request;
+            httpContext = httpContextAccessor.HttpContext;
         }
 
         public Task DisplayedAsync(ShapeDisplayContext context) => Task.CompletedTask;
@@ -38,7 +33,7 @@ namespace AodlTheme.ShapeProviders
         {
             foreach(var afc in alternateFactoryComponents)
             {
-                if (afc.predicate(request))
+                if (afc.predicate(httpContext))
                 {
                     context.ShapeMetadata.OnDisplaying(displayContext =>
                     {

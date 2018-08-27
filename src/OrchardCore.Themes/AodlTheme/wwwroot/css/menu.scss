@@ -10,6 +10,10 @@ html {
 }
 
 body {
+    @media (max-width: $sm-max){
+        background-color: #070707;
+    }
+
     padding-top: 50px;
     max-width: $largest-screen-width;
     height: 100%;
@@ -95,7 +99,7 @@ body {
     margin: 0 0 4px 0;
 }
 
-@include titleBoxGrowThreshold {
+@include titleBoxGrowThreshold  {
     .title-box:not(.title-box-small) > h1, .title-box:not(.title-box-small) > h2, .title-box:not(.title-box-small) > h3 {
         line-height: 150%;
         transition: line-height 0.5s;

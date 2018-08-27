@@ -41,9 +41,19 @@
     </nav>
     @await RenderSectionAsync("Header", required: false)
     <div class="bodyScroll body-content">
+
         <!--ajax partial content-->
     </div>
-    
+    <div class="pageLoaderProgress">
+        <div><!--table display container-->
+            <div class="container">
+                <div class="progress">
+                    <div class="progress-bar pre-js-progress progress-bar-striped" role="progressbar"></div>
+                    <div class="progress-bar js-progress progress-bar-striped" role="progressbar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     @*<script src="/TheAgencyTheme/vendor/jquery/jquery.min.js"></script>*@
     <resources type="FootScript" />
 </body>

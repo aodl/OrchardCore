@@ -66,14 +66,22 @@
         partialCache = (function () {
             var _alreadyLoadedCache = {};// object keys will be "[path]", value will be [pageContent]
 
+            var progressContainer = $(".pageLoaderProgress");
+            var progressBar = progressContainer.find(".js-progress");
+
             function _getOrAdd(path, detachCurr, attachPartial) {
                 detachCurr(function () {
                     if (_alreadyLoadedCache[path]) {
                         attachPartial(_alreadyLoadedCache[path]);
                     } else {
+                        progressBar.css("width", "0");
+                        progressContainer.show();
+                        progressBar.animate({ "width": "50%" }, 20000);
                         ajaxBodyContent(path, function (responseContent) {
                             attachPartial(responseContent, function (attachedPartial) {
                                 _alreadyLoadedCache[path] = attachedPartial;
+                                progressBar.finish();
+                                progressContainer.fadeOut();
                             });
                         });
                     }
@@ -87,16 +95,18 @@
 
         $(function () {
             function clickScrollAnimation(scrollable, toPosition, after) {
-                scrollable.animate({ scrollTop: toPosition }, {
-                    duration: "slow",
-                    step: function (now, prop) {
-                        if (!currentlyAutoScrolling) {
-                            //stop animation. start == end means nothing to be done anymore
-                            prop.start = prop.end = prop.now;
-                        }
-                    },
-                    complete: after
-                });
+                if (scrollable.css("scrollTop") != toPosition) {
+                    scrollable.animate({ scrollTop: toPosition }, {
+                        duration: "slow",
+                        step: function (now, prop) {
+                            if (!currentlyAutoScrolling) {
+                                //stop animation. start == end means nothing to be done anymore
+                                prop.start = prop.end = prop.now;
+                            }
+                        },
+                        complete: after
+                    });
+                }
             }
 
             function scrollTo(element, after) {
@@ -172,6 +182,7 @@
 
             //expose closures by binding to onclick events of header links
             $(".headerLink").click(function (event, customAfter) {
+                $("#collapsibleNavContent").collapse("hide");
                 var linkName = $(this).data("headerlinkdtargetid").split('-')[0];
                 var path = $(this).data("headerlink");
                 var fragOrUndef = $(this).data("fragment");
@@ -238,11 +249,16 @@
             var displays = $(".aboutMedia").children();
             var selected = displays.filter($(e.target).attr("data-target"));
             var color = selected.attr("data-color");
+            var currentColor = $(".aboutMedia").closest(".zebraSection").css("background-color");
+            if (color === "black") {// assumes that that section bg defaults to black on small screen (which couldn't be the case if the section was offset by one due to zebra styling)
+                $(".aboutMedia").closest(".zebraSections").removeClass("zebraSectionsInverse");
+            } else {
+                $(".aboutMedia").closest(".zebraSections").addClass("zebraSectionsInverse");
+            }
             $(".aboutMedia").css("background-color", color);
-            displays.fadeOut();
-            selected.fadeIn();
+            displays.fadeOut(400, "linear");
+            selected.fadeIn(400, "linear");
         });
     }
-
 }());
 

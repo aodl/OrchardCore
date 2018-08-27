@@ -1,19 +1,64 @@
 @import "variables";
 
+$avoidShadowSpacer: 5px;
+
 .aboutMedia {
+    bottom: -$avoidShadowSpacer;
     top: 0;
     order: 1;
     background-color: black;
-    & > * {
-        margin-bottom: 5px;
-        bottom: 0px;
+
+    @media(min-width: $md-min){
+        & > * {
+            margin-bottom: 5px;
+            bottom: 0px;
+        }
+    }
+}
+
+@keyframes toHalfWay {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 50%;
+    }
+}
+
+.pageLoaderProgress {
+    width: 100%;
+    height: 100%;
+
+    & > div {
+        padding: 10%;
+        height: 100%;
+        width: 100%;
+        display: table;
+        background-color: rgba(255, 255, 255, 0.4);
+
+        & > div {
+            vertical-align: middle;
+            display: table-cell;
+
+            & .js-progress {
+                transition: width 0s !important;
+                background-color: #808080;
+            }
+
+            & .pre-js-progress {
+                animation: toHalfWay;
+                animation-duration: 5s;
+                width: 50%;
+                background-color: #808080;
+            }
+        }
     }
 }
 
 .aboutMedia, .aboutMediaChooser {
     transition: background-color 0.5s;
     position: absolute;
-    bottom: 0;
     right: 0px;
     left: 366px;
     display: inline-block;
@@ -123,14 +168,6 @@
     }
 }
 
-body {
-    padding-bottom: 20px;
-}
-
-.bodyScroll{
-    margin-top: -50px;
-}
-
 @include titleBoxGrowThreshold {
     .bodyScroll {
         margin-top: 0;
@@ -147,6 +184,10 @@ body {
         padding-left: 30px;
         padding-right: 30px;
     }
+}
+
+.zebraSection{
+    transition: background-color 0.4s linear;
 }
 
 .zebraSections {
@@ -172,12 +213,24 @@ body {
         }
     }
 }
+.zebraSectionsInverse {
+    @media (max-width: $sm-max) {
+        & .zebraSection:nth-child(2n+1) {
+            box-shadow: 0 -1px 5px 1px #f7f7f7;
+            background-color: white;
+        }
+
+        & .zebraSection:nth-child(2n) {
+            background-color: black;
+            box-shadow: 0 0px 5px 2px #070707;
+        }
+    }
+}
 
 #aboutSection {
     box-shadow: none;
-    background-color: transparent;
+    margin-bottom: $avoidShadowSpacer;
 }
-
 
 #blogSummarySection, #feauresSection, #contactSection {
     height: 200px;
