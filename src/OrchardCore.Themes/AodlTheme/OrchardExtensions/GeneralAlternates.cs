@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AodlTheme.ShapeProviders
 {
+    //TODO, currently these are 'global alternates' triggered for every single type/part of content on the page. Ajax for example only needs to be for pages
     public class GeneralAlternatesFactory : IShapeDisplayEvents
     {
         private (string templateSuffix, Func<HttpContext, bool> predicate)[] alternateFactoryComponents = 

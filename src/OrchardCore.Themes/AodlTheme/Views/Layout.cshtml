@@ -41,20 +41,31 @@
     </nav>
     @await RenderSectionAsync("Header", required: false)
     <div class="bodyScroll body-content">
-
         <!--ajax partial content-->
     </div>
     <div class="pageLoaderProgress">
         <div><!--table display container-->
             <div class="container">
+                <div class="errorMsg text-center" style="position: relative;">
+                    <h5 style="position: absolute; bottom: 0;">
+                        Hmmm, their seems to be a problem loading the page <b>:(</b>
+                    </h5>
+                </div>
                 <div class="progress">
                     <div class="progress-bar pre-js-progress progress-bar-striped" role="progressbar"></div>
                     <div class="progress-bar js-progress progress-bar-striped" role="progressbar"></div>
                 </div>
+                <div class="suggestionMsg">
+                    <b>Suggestions:</b>
+                    <ul>
+                        <li>Please check your network connectivity for issues</li>
+                        <li>Please ensure JavaScript is enabled in your browser</li>
+                        <li>If all else fails, come back later <b>;)</b></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    @*<script src="/TheAgencyTheme/vendor/jquery/jquery.min.js"></script>*@
     <resources type="FootScript" />
 </body>
 </html>

@@ -45,7 +45,8 @@ body {
     position: absolute;
     right: 1px;
     height: 100%;
-    top: $navbar-height;
+    top: 0;
+    padding-top: $navbar-height;
     z-index: -1;
 }
 @media (max-width: $smallest-screen-width){

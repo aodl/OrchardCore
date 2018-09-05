@@ -7,7 +7,7 @@ using OrchardCore.DisplayManagement.Descriptors;
 using OrchardCore.Menu.Models;
 
 namespace OrchardCore.Menu
-{
+{// hmmm
     public class MenuShapes : IShapeTableProvider
     {
         public void Discover(ShapeTableBuilder builder)

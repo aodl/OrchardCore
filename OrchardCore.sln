@@ -347,6 +347,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AODL", "AODL\AODL.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AodlTheme", "src\OrchardCore.Themes\AodlTheme\AodlTheme.csproj", "{6994D533-4902-4870-AB94-FB6422DAA989}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AodlThemeAdmin", "src\OrchardCore.Themes\AodlThemeAdmin\AodlThemeAdmin.csproj", "{14C6F5EB-72EA-4A4A-B8B0-B3EBEB693D5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -937,6 +939,10 @@ Global
 		{6994D533-4902-4870-AB94-FB6422DAA989}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6994D533-4902-4870-AB94-FB6422DAA989}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6994D533-4902-4870-AB94-FB6422DAA989}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14C6F5EB-72EA-4A4A-B8B0-B3EBEB693D5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14C6F5EB-72EA-4A4A-B8B0-B3EBEB693D5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14C6F5EB-72EA-4A4A-B8B0-B3EBEB693D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14C6F5EB-72EA-4A4A-B8B0-B3EBEB693D5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1101,6 +1107,7 @@ Global
 		{261E038A-25DA-4DD7-A66A-5884C6F2BEBF} = {A066395F-6F73-45DC-B5A6-B4E306110DCE}
 		{724B743F-ECD0-4553-8ADA-E5F231822480} = {275E087F-A4E2-4A7B-A924-ED68E3A52086}
 		{6994D533-4902-4870-AB94-FB6422DAA989} = {AF3BADEA-CC93-4116-B3C1-F8D074EBEE4F}
+		{14C6F5EB-72EA-4A4A-B8B0-B3EBEB693D5E} = {AF3BADEA-CC93-4116-B3C1-F8D074EBEE4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46A1D25A-78D1-4476-9CBF-25B75E296341}

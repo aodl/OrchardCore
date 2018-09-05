@@ -1,8 +1,6 @@
 <div class="bodyAndFooter">
     @await RenderBodyAsync()
-@*    <footer class="container">
-        <!--<hr />
-        <p>&copy; @DateTime.Now.Year - Alexander O.D. Lorimer</p>-->
+    <footer class="customContainer">
         @await RenderSectionAsync("Footer", required: false)
-    </footer>*@
+    </footer>
 </div>

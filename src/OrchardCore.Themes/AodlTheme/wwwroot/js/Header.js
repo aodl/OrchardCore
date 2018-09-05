@@ -76,7 +76,7 @@
                     } else {
                         progressBar.css("width", "0");
                         progressContainer.show();
-                        progressBar.animate({ "width": "50%" }, 20000);
+                        progressBar.animate({ "width": "45%" }, 20000);
                         ajaxBodyContent(path, function (responseContent) {
                             attachPartial(responseContent, function (attachedPartial) {
                                 _alreadyLoadedCache[path] = attachedPartial;
