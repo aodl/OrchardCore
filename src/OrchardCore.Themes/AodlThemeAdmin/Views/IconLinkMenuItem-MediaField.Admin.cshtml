@@ -1,0 +1,6 @@
+@using System.Linq
+@using OrchardCore.Media.Fields;
+@{ 
+    MediaField mediaField = Model.Field;
+}
+<img asset-src="@mediaField.Paths.Single()" />
