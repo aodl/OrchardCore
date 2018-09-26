@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\OrchardCore.Modules\OrchardCore.Media\OrchardCore.Media.csproj" />
     <ProjectReference Include="..\..\OrchardCore\OrchardCore.Theme.Targets\OrchardCore.Theme.Targets.csproj" />
     <ProjectReference Include="..\..\OrchardCore\OrchardCore.DisplayManagement\OrchardCore.DisplayManagement.csproj" />
     <ProjectReference Include="..\..\OrchardCore\OrchardCore.ResourceManagement\OrchardCore.ResourceManagement.csproj" />
@@ -13,10 +14,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.TagHelpers" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Scripts\" />
   </ItemGroup>
 
 </Project>
