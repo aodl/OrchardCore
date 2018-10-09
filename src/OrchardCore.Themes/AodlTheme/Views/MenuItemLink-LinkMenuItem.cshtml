@@ -8,7 +8,7 @@
 
 @if (level > 0)
 { 
-    <a href="#" class="dropdown-item headerLink" data-headerlinkdtargetid="Drop-link" data-headerlink="@Url.Content((string)linkMenuItemPart.Url)">@linkMenuItemPart.Name</a>
+    <a href="#" class="dropdown-item headerLink" data-fragment="@(((string)linkMenuItemPart.Url).Split('#').Skip(1).SingleOrDefault() ?? "")" data-headerlinkdtargetid="Drop-link" data-headerlink="@Url.Content((string)linkMenuItemPart.Url)">@linkMenuItemPart.Name</a>
 }
 else if ((bool)(Model.HasItems))
 {
