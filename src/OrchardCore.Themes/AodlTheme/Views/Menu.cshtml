@@ -1,3 +1,4 @@
+@using System.Collections.Generic;
 @{
     // By using a tag builder, sub items can alter the
     // menu element. Note how Display is called on the menu
@@ -6,7 +7,7 @@
     TagBuilder tag = Tag(Model, "ul");
     tag.AddCssClass("nav navbar-nav menuLinks");
 
-    foreach (var item in Model.Items)
+    foreach (var item in (Model.Items as IEnumerable<dynamic>))
     {
         tag.InnerHtml.AppendHtml(await DisplayAsync(item));
     }
@@ -14,19 +15,7 @@
 
 @tag
 
-<ul class="socialIconContainer">
-    <li style="list-style: none;"><!--IE list-style bug, needs inlining-->
-        <a class="socialIcon" href="https://twitter.com/AODLorimer" target="_blank">
-            <img src="/AodlTheme/img/twitter.svg">
-        </a>
-        <a class="socialIcon" href="https://www.facebook.com/aodlorimer" target="_blank">
-            <img src="/AodlTheme/img/facebook.svg">
-        </a>
-        <a class="socialIcon" href="https://uk.linkedin.com/in/aodlorimer" target="_blank">
-            <img src="/AodlTheme/img/linkedin.svg">
-        </a>
-        <a class="socialIcon" href="https://github.com/aodl" target="_blank">
-            <img src="/AodlTheme/img/github.svg">
-        </a>
-    </li>
-</ul>
+@if (Model.Content != null)
+{   
+    @await DisplayAsync(Model.Content)
+}
