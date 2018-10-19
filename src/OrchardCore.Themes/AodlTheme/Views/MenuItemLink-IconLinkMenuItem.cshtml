@@ -1,0 +1,11 @@
+@using System.Linq
+@using OrchardCore.ContentManagement
+
+@{
+    ContentItem contentItem = Model.ContentItem;
+    var linkMenuItemPart = contentItem.Content["IconLinkMenuItem"];
+}
+
+<a class="socialIcon" href="@(linkMenuItemPart.Url.Text)" target="_blank">
+    <img asset-src="@linkMenuItemPart.Icon.Paths[0]" />
+</a>
