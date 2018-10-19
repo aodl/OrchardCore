@@ -7,7 +7,7 @@
     TagBuilder tag = Tag(Model, "ul");
     tag.AddCssClass("nav navbar-nav menuLinks");
 
-    foreach (var item in (Model.Items as IEnumerable<dynamic>))
+    foreach (var item in Model.Items)
     {
         tag.InnerHtml.AppendHtml(await DisplayAsync(item));
     }

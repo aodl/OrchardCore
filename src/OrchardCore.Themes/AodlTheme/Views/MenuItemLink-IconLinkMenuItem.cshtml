@@ -7,5 +7,5 @@
 }
 
 <a class="socialIcon" href="@(linkMenuItemPart.Url.Text)" target="_blank">
-    <img asset-src="@linkMenuItemPart.Icon.Paths[0]" />
+    <img asset-src="@(((IEnumerable<dynamic>)linkMenuItemPart.Icon.Paths).SingleOrDefault())" />
 </a>
