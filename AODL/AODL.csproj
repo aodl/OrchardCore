@@ -17,6 +17,10 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
   <!-- Necessary as we reference the Project and not the Package -->
   <Import Project="..\src\OrchardCore\OrchardCore.Application.Cms.Targets\OrchardCore.Application.Cms.Targets.targets" />
   <Import Project="..\src\OrchardCore\OrchardCore.Application.Targets\OrchardCore.Application.Targets.targets" />
