@@ -17,6 +17,8 @@
     var multiple = settings.Multiple.ToString().ToLowerInvariant();
 }
 
+@if(true)
+{
 <script asp-src="/OrchardCore.ContentFields/Scripts/contentPicker.js" asp-name="contentPicker" at="Foot" depends-on="vuejs, vuemultiselect"></script>
 <style asp-src="/OrchardCore.ContentFields/Styles/contentPicker.min.css" debug-src="/OrchardCore.ContentFields/Styles/contentPicker.css"></style>
 <script asp-src="https://vuejs.org/js/vue.min.js" debug-src="https://vuejs.org/js/vue.js" asp-name="vuejs" at="Foot"></script>
@@ -42,4 +44,13 @@
 
 <script at="Foot">
     initializeContentPickerFieldEditor('@vueElementId', @selectedItems, '@Model.ContentItemIds', '@tenantPath', '@partName', '@fieldName');
+
+
+    setTimeout(function(){
+        alert('hello');
+        @*$('#' + '@vueElementId').find('.multiselect').removeAttr("tabindex").focus();*@
+    }, 500)
 </script>
+
+}
+
